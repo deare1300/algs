@@ -4,7 +4,7 @@ void self::test_vector()
     Vector<std::string> v(1);
     v.push_back("one");
     v.push_back("two");
-    for(typename self::Vector<std::string>::iterator it = v.begin(); it != v.end(); ++it)
+    for(self::Vector<std::string>::iterator it = v.begin(); it != v.end(); ++it)
             std::cout<<*it<<std::endl;
 }
 

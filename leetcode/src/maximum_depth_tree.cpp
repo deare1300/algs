@@ -1,6 +1,6 @@
-#include "maximum_depth_tree.h"
-#include "treenode.h"
-#include "header.h"
+#include "include/maximum_depth_tree.h"
+#include "include/treenode.h"
+#include "include/header.h"
 Maximum_Depth_Tree::Maximum_Depth_Tree()
 {
     //ctor

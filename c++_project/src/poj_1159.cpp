@@ -77,6 +77,6 @@ int stone(int m, int n) {
         return 1;
     else {
         if(m > n)
-            return (m-n) % 2
+            return (m-n) % 2;
     }
 }
