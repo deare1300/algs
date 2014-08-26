@@ -19,11 +19,9 @@ private:
     };
 
 public:
-    
     /*
      *recursion algs
      */
-
     /*
      *1) positive recursion
      */
@@ -31,13 +29,9 @@ public:
     /*
      *2) none positive recursion
      */
-
     T totalNQueens(T n);
-
     /*
-     *
      *the algs about array
-     *
      */
     template<typename INT>
     INT maxProfit(std::vector<INT> &price); 
@@ -48,16 +42,19 @@ public:
 
 
     /*
-     *
      *the algs about tree
-     *
      */
     int maxDepth(TreeNode *root);
    
     bool hasCycle(ListNode *head);
     ListNode *__deleteSortedDuplicates(ListNode *head);
     ListNode *deleteDuplicates(ListNode *head, bool sorted = true);
-    
+private:
+    /*
+     * total queen 
+     */
+    T __addQueen(vector<T> &flag, T line);
+    bool __isLegalQueen(vector<T> &flag, T line, T col);
 };
 
 template<class T>
@@ -230,8 +227,33 @@ int Solution<T>::removeElement(T A[], int n, T elem) {
 
 template<class T>
 T Solution<T>::totalNQueens(T n) {
-    throw "not complete nqueen";
-    return 0;
+    //throw "not complete nqueen";
+    vector<T> flag(n, 0);
+    return __addQueen(flag, 0);
 }
+
+template<class T>
+T Solution<T>::__addQueen(vector<T> &flag, T line) {
+    size_t len = flag.size();
+    T result = 0;
+    if(len == line) {  return 1; }
+    for(T i = 0; i < len; ++i) {
+        if(__isLegalQueen(flag, line, i)) {
+            flag[line] = i;
+            result += __addQueen(flag, line+1);
+        }
+    }
+    return result;
+}
+
+template<class T>
+bool Solution<T>::__isLegalQueen(vector<T> &flag, T line, T col) {
+    for(T i = 0; i < line; ++i) {
+        if(flag[i] == col) return false;
+        if(abs(i - line) == abs(flag[i] - col)) return false;
+    }
+    return true;
+}
+
 void test_solution();
 #endif
