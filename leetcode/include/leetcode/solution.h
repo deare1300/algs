@@ -19,17 +19,45 @@ private:
     };
 
 public:
-    int maxDepth(TreeNode *root);
+    
+    /*
+     *recursion algs
+     */
+
+    /*
+     *1) positive recursion
+     */
+    T climbStairs(T n);
+    /*
+     *2) none positive recursion
+     */
+
+    T totalNQueens(T n);
+
+    /*
+     *
+     *the algs about array
+     *
+     */
     template<typename INT>
     INT maxProfit(std::vector<INT> &price); 
-    bool hasCycle(ListNode *head);
-    ListNode *__deleteSortedDuplicates(ListNode *head);
-    ListNode *deleteDuplicates(ListNode *head, bool sorted = true);
     int searchInsert(T a[], int n, T target);
-    T climbStairs(T n);
     int __threeSingleNumber(int a[], int n);
     T maxSubArray(T A[], int n) { return dynamic::maxSubArray(A, n); }
     int removeElement(T A[], int n, T elem);
+
+
+    /*
+     *
+     *the algs about tree
+     *
+     */
+    int maxDepth(TreeNode *root);
+   
+    bool hasCycle(ListNode *head);
+    ListNode *__deleteSortedDuplicates(ListNode *head);
+    ListNode *deleteDuplicates(ListNode *head, bool sorted = true);
+    
 };
 
 template<class T>
@@ -200,5 +228,10 @@ int Solution<T>::removeElement(T A[], int n, T elem) {
     return last+1;
 }
 
+template<class T>
+T Solution<T>::totalNQueens(T n) {
+    throw "not complete nqueen";
+    return 0;
+}
 void test_solution();
 #endif
