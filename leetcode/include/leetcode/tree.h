@@ -1,9 +1,10 @@
-a#ifndef __TREE_H_
+#ifndef __TREE_H_
 #define __TREE_H_
 
 #include <vector>
 #include <stack>
 #include <cstdio>
+#include <math.h>
 
 #define DEBUG
 //#undef DEBUG
@@ -17,7 +18,26 @@ struct TreeNode {
     TreeNode *right;
     value_type val;
     TreeNode(T val):left(0), right(0),val(val) { }
+	bool isBalanced();
+	int height();
 };
+
+template<class T>
+int TreeNode<T>::height() {
+	if(left == 0 && right == 0)	return 1;
+	int nleft = 0;
+	int nright = 0;
+	if(left) nleft = left->height();
+	if(right) nright = right->height();
+	return (left > right ? left : right)+1;
+}
+	
+template<class T>
+bool TreeNode<T>::isBalanced() {
+	int nleft = (left ? left->height() : 0);
+	int nright = (right ? right->height() : 0);
+	return abs(nleft-nright) < 2;
+}
 
 template<class T>
 void destroy_node(TreeNode<T> *node) {
