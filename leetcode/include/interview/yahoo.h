@@ -42,19 +42,19 @@ template<class T>
 void Yahoo<T>::get_array(int a[], int b[], int n) {
     b[0] = a[0];
     for(int i = 1; i < n; ++i) {
-        b[i] = a[i]*a[i-1];
+        b[i] = a[i]*b[i-1];
     }
 
     for(int i = n-2; i > -1; --i) {
-        a[i] = a[i-1]*a[i];
+        a[i] = a[i+1]*a[i];
     }
-    b[0] = a[1];
     a[0] = b[0];
+    b[0] = a[1];
+    b[n-1] = b[n-2];
     for(int i = 1; i < n-1; ++i) {
         a[i] = b[i];
         b[i] = a[i-1] * a[i+1];
     }
-    b[n-1] = a[n-2];
 }
 
 template<class T>
