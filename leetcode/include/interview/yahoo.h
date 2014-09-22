@@ -4,9 +4,16 @@
 /*
  *Yahoo total 4 problems
  */
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
 
 template<class T>
 struct Mice {
+    friend ostream& operator<<(ostream &os, Mice &m) {
+       return  os<<m.weight<<','<<m.speed;
+    }
     int weight;
     int speed;
     bool operator<(const Mice &m) { return this->speed > m.speed || (this->speed == m.speed && this->weight < m.weight); } 
@@ -27,7 +34,7 @@ class Yahoo {
         static void get_array(int a[], int b[], int n);
         static int find_two_times(int a[], int n);
         static bool find_number(vector<vector<int> > &matrix, int target);
-        static int find_lis(Mice[] mices, int n);
+        static int find_lis(Mice<T>  mices[], int n);
 };
 
 
@@ -72,7 +79,7 @@ int Yahoo<T>::find_two_times(int a[], int n) {
 }
 
 template<class T>
-bool Yahoo<T>::__find_number(vector<vector<int> &matrix, int row, int col, int target) {
+bool Yahoo<T>::__find_number(vector<vector<int> > &matrix, int row, int col, int target) {
     if(row < 0 || col < 0)
         return false;
     if(matrix[row][col] == target)
@@ -90,9 +97,26 @@ bool Yahoo<T>::find_number(vector<vector<int> > &matrix, int target) {
 }
 
 template<class T>
-int Yahoo<T>::find_lis(Mice[] mices, int n) {
-    
-    return 0;
+int Yahoo<T>::find_lis(Mice<T> mices[], int n) {
+    sort(&mices[0], &mices[n]);
+    vector<Mice<T> > v;
+    int max = 1;
+    v.push_back(mices[0]);
+    typename vector<Mice<T> >::iterator it;
+    for(int i = 1; i < n; ++i) {
+        it = std::lower_bound(v.begin(), v.end(), mices[i]);
+        if(it == v.end()) {
+            ++max;
+            v.push_back(mices[i]);
+        }
+        else {
+            *it = mices[i];
+        }
+    }
+    for(it = v.begin(); it != v.end(); ++it) {
+        std::cout<<*it<<std::endl;
+    }
+    return max;
 }
 
 /*
