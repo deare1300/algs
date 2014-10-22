@@ -3,6 +3,7 @@
 #include "include/beautyprogram/arrsplit.h"
 #include "include/beautyprogram/seqplus.h"
 #include "leetcode/print.h"
+#include "include/beautyprogram/prefixsort.h"
 
 #include <iostream>
 
@@ -19,7 +20,7 @@ void test_lis() {
 void test_arrsplit() {
 	cout<<"arr split"<<endl;
 	int a[] = { 1, 2, 3, 4, 5, 6, 7, 8};
-	int total = sum(&a[0], sizeof(a)/sizeof(a[0]));
+	int total = sum(&a[0], (int)sizeof(a)/sizeof(a[0]));
 	dump(&a[0], &a[sizeof(a)/sizeof(a[0])]);
 	ArrSplit<int> arrspl(a, sizeof(a)/sizeof(a[0]));
 	cout<<"total sum:"<<total<<"\tsplits:"<<arrspl.split()<<endl;
@@ -34,7 +35,7 @@ void test_analysis() {
 	for(int i = 0; i < num; ++i)
 		rg[i] = 2+i;
 
-	int hit;
+	//int hit;
 	for(int i = 1; i < INT_MAX; ++i) {
 		int hit = 0;
 		int hit1, hit2;
@@ -68,6 +69,17 @@ void test_seqplus() {
 	}
 }
 
+void test_prefixsort() {
+	cout<<"prefixSort"<<endl;
+	int a[] = { 3, 2, 6, 5, 4, 9,8, 7, 0};
+	PrefixSort<int> ps(a, sizeof(a)/sizeof(a[0]));
+	dump(&a[0], &a[sizeof(a)/sizeof(a[0])]);
+	cout<<ps.sort()<<endl;
+	vector<int> procedure =ps.get_procedure();
+	cout<<"best procedure"<<endl;
+	dump(procedure.begin(), procedure.end());
+}
+
 void test_beauty() {
 
 #define LIS
@@ -82,9 +94,14 @@ test_arrsplit();
 #endif
 //test_analysis();
 
-#define SEQPLUS
+//#define SEQPLUS
 #ifdef SEQPLUS
-//cout<<"SEQPLUS"<<endl;
+cout<<"SEQPLUS"<<endl;
 test_seqplus();
+#endif
+
+#define PREFIXSORT
+#ifdef PREFIXSORT
+test_prefixsort();
 #endif
 }

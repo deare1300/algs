@@ -13,7 +13,7 @@ BIN_TARGET = ${DIR_BIN}/${TARGET}
 
 
 CC = g++
-CFLAGS = -g -Wall -I ${CRT_DIR} -I ${CRT_DIR}/include -lpthread
+CFLAGS = -g -Wall -I ${CRT_DIR} -I ${CRT_DIR}/include -Wno-deprecated 
 
 ${BIN_TARGET}:${OBJ}
 	@echo ${BIN_TARGET} -LINK ${OBJ} -FLAG ${CFLAGS}......
