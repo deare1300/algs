@@ -16,10 +16,9 @@ def personrank(G, root, alpha, step):
 				tmp[j] += alpha*rank[i]/(len(ri)*1.0)
 		tmp[root] += 1-alpha
 		rank = tmp
-		print k
-		for key, value in rank.items():
-			print key, value,
-		print 		
+	for key, value in sorted(rank.items(), key=lambda e:e[1], reverse = True):
+		print key, value,
+	print 		
 	return rank
 				
 if __name__ == '__main__':
@@ -30,4 +29,8 @@ if __name__ == '__main__':
 	'b' : {'B' : 1},
 	'c' : {'A' : 1, 'B' : 1, 'C':1},
 	'd' : {'B' : 1, 'C' : 1}}
-	personrank(G, 'A', 0.85, 20)
+	for k in G.keys():
+		print "%s------------->" % k
+		personrank(G, k, 0.85, 20)
+		personrank(G, k, 0.85, 50)
+		personrank(G, k, 0.85, 100)
