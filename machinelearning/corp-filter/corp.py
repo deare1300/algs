@@ -3,6 +3,7 @@
 
 import math
 from sys import exit
+import random
 
 class Ratings:
 	def __init__(self, filename):
@@ -106,16 +107,91 @@ class Ratings:
 		for item1, item_score in self.itemCF.items():
 			for item2, score in item_score.items():
 				print "itemCF:",item1,item2,score
+	
+	
+	# return the center of arr 
+	# arr like [ {item1: score1, item2: score2},{ },...]
+	def center(self, arr):
+		len_dict = len(arr)
+		center = { }
+		for key in arr[0]:
+			center[key] = 0.0
+		for e in arr:
+			for key in e:
+				center[key] += e[key]
+		for key in center:
+			center[key] /= len_dict
+		return center
+
+	# cluster the item or users
+	# the user cluster data is data[user][item] = score
+	# the item cluster data is data[item][user] = score
+	# the clusters is the initlized the center of the clusters
+	# the user cluser clusters is clusters[item] as the same with
+	# data[user][item]
+	def nomarl_cluster(self, data, clusters, step = 20):
+		print "cluster step is",step
+		for	i in range(step):
+			cls = []
+			for c in range(len(clusters)):
+				cls.append([])
+				
+			for key in data:
+				min = 0
+				try:
+					min_distance = self.get_dict_score(data[key], clusters[0])
+				except:
+					print "error ** distance"
+					exit()
+				for c in range(len(clusters)):
+					distance = self.get_dict_score(data[key], clusters[c])
+					if distance < min_distance:
+						min = c
+						min_distance = distance
+				cls[min].append(data[key])
+				
+			new_clusters = []
+			for d in cls:
+				new_clusters.append(self.center(d))
+			clusters = new_clusters
+		
+		for c in clusters:
+			print c.values()
+		return (clusters,cls)
+	
+	def user_cluster(self, cluster_num = 5, step = 20):
+		clusters = [ ]
+		for i in range(cluster_num):
+			if i > 100:
+				break
+			while True:
+				rand = random.randint(0, 100)
+				if self.user[rand] not in clusters:
+					clusters.append(self.user[rand])
+					break
+		self.nomarl_cluster(self.user, clusters, step)
+		self.nomarl_cluster(self.user, clusters, step*2)
+		self.nomarl_cluster(self.user, clusters, step*5)
+		self.nomarl_cluster(self.user, clusters, step*25)
 		
 if __name__ == '__main__':
 	filename = 'jester-data-1.txt'
-	line = 100
+	line = 500
 	
 	rating = Ratings(filename)
 	rating.process_data(line)
+	
+	rating.user_cluster(step = 20)
+	'''
+	rating.user_cluster(step = 50)
+	rating.user_cluster(step = 100)
+	rating.user_cluster(step = 500)
+	'''
+	'''
 	rating.simlar_user()
 	for i in range(line):
 		rating.get_sim_user(i)
 	
 	print "itemCF"
 	rating.sim_item()
+	'''
