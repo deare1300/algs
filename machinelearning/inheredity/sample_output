@@ -1,0 +1,27 @@
+sample=10	step=10	f(1.834051)=3.608594
+sample=10	step=50	f(0.853448)=2.848447
+sample=10	step=250	f(1.489980)=2.461304
+sample=50	step=10	f(1.664213)=3.501048
+sample=50	step=50	f(1.848638)=3.846944
+sample=50	step=250	f(1.859381)=3.779208
+sample=250	step=10	f(1.849996)=3.849996
+sample=250	step=50	f(1.850450)=3.850265
+sample=250	step=250	f(1.851044)=3.850048
+sample=10	step=10	f(-0.693373)=2.143322
+sample=10	step=50	f(-0.105150)=1.983062
+sample=10	step=250	f(-0.189031)=1.936143
+sample=50	step=10	f(-0.267731)=2.227257
+sample=50	step=50	f(-0.210857)=2.070536
+sample=50	step=250	f(-0.147939)=1.852372
+sample=250	step=10	f(-0.197574)=1.984959
+sample=250	step=50	f(-0.224955)=2.158843
+sample=250	step=250	f(-0.215805)=2.102804
+sample=10	step=10	fx = x*math.sin(10.0*math.pi*x) + 2.0---->f(-0.073601)=2.054281
+sample=10	step=50	fx = x*math.sin(10.0*math.pi*x) + 2.0---->f(-0.228360)=2.177592
+sample=10	step=250	fx = x*math.sin(10.0*math.pi*x) + 2.0---->f(-0.281932)=2.151577
+sample=50	step=10	fx = x*math.sin(10.0*math.pi*x) + 2.0---->f(-0.271625)=2.211316
+sample=50	step=50	fx = x*math.sin(10.0*math.pi*x) + 2.0---->f(-0.185590)=1.918825
+sample=50	step=250	fx = x*math.sin(10.0*math.pi*x) + 2.0---->f(-0.215747)=2.102431
+sample=250	step=10	fx = x*math.sin(10.0*math.pi*x) + 2.0---->f(-0.215268)=2.099344
+sample=250	step=50	fx = x*math.sin(10.0*math.pi*x) + 2.0---->f(-0.214311)=2.093137
+sample=250	step=250	fx = x*math.sin(10.0*math.pi*x) + 2.0---->f(-0.216059)=2.104437
