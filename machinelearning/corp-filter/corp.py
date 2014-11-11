@@ -159,6 +159,8 @@ class Ratings:
 			print c.values()
 		return (clusters,cls)
 	
+	# cluster also called the k-means
+	# cluster_num is k
 	def user_cluster(self, cluster_num = 5, step = 20):
 		clusters = [ ]
 		for i in range(cluster_num):

@@ -111,11 +111,18 @@ def sample_f(dx, isPrint = False):
 	x = -1.0 + int(dx, 2)*3.0/(math.pow(2, 22)-1.0)
 	fx = x*math.sin(10.0*math.pi*x) + 2.0
 	if isPrint:
-		print "f(%f)=%f" % (x, fx)
+		print "fx = x*math.sin(10.0*math.pi*x) + 2.0---->f(%f)=%f" % (x, fx)
+	return fx
+
+def sample_f1(dx, isPrint = False):
+	x = -1.0 + int(dx, 2)*3.0/(math.pow(2, 22)-1.0)
+	fx = (x + 1.0)*(x - 1.0)*(x-2.0)
+	if isPrint:
+		print "fx = (x + 1.0)*(x - 1.0)*(x-2.0) ---> f(%f)=%f" % (x, fx)
 	return fx
 
 if __name__ == '__main__':
-	herit = Inherit(22, sample_f)
+	herit = Inherit(22, sample_f1)
 	sample = 10
 	while sample <= 500:
 		#print "sample len is %d:" % sample 
