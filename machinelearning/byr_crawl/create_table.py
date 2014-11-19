@@ -34,25 +34,26 @@ def create_table(tbl_name, db_name = None, conn = None):
 		cur = conn.cursor()
 
 		# create the parent forums
-		cur.execute("create table p_forums(
+		cur.execute("create table if not exists p_forums(
 			id int auto_increment,
 			name varchar(255) unique, 
 			url varchar(255) unique,
 			primary key(id))"
 			)
-
+		
 		# create the sub forum
-		cur.execute("create table sub_forums(
+		cur.execute("create table if not exists sub_forums(
 			id int auto_increment, 
 			p_id int,
+			level int default 1,
 			name varchar(255) unique,
 			url varchar(255) unique,
-			primary key(id),
-			foreign key(p_id) references(p_forums))"
+			primary key(id))"
+			#foreign key(p_id) references(p_forums)"
 			)
 
 		# create the article abstract
-		cur.execute("create table article(
+		cur.execute("create table if not exists article(
 			id int auto_increment,
 			sub_id int,
 			url varchar(255),
