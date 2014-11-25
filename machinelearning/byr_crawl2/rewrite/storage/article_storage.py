@@ -1,3 +1,5 @@
+#!:/bin/python
+# -*- coding:utf-8 -*-
 '''
 Created on 2014-11-25
 
@@ -15,7 +17,7 @@ class ArticleStorage(Storage):
             return None
         self.db.execute('select url from %s' % (byr_tables["outline_section"]))
         stored_urls = self.db.fetchall()
-        print stored_urls
+        #print stored_urls
         values = ""
         p_info = self.pre_statement(p_info)
         for url, name in p_info.items():

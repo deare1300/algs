@@ -5,14 +5,17 @@ Created on 2014-11-25
 '''
 from rewrite.storage.abstract_storage import Storage
 from rewrite.database.tables import byr_tables
+#!:/bin/python
+# -*- coding:utf-8 -*-
 
 class SectionStorage(Storage):
     def __init__(self):
         super(SectionStorage, self).__init__()
+    
     def store(self, info, update = False):
         self.db.execute("select url from %s" % byr_tables["sub_section"])
         urls = self.db.fetchall()
-        print urls
+        #print urls
         if not update:
             for e in info:
                 if not e or e["title"] == None:

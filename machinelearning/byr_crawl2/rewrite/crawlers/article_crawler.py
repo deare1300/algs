@@ -1,3 +1,5 @@
+#!:/bin/python
+# -*- coding:utf-8 -*-
 '''
 Created on 2014-11-23
 
@@ -19,8 +21,6 @@ class ArticleCrawler(Crawler):
         super(ArticleCrawler, self).__init__(path_url = path_url, 
               root_url = root_url, headers = headers)
         self.section_id = subject_id
-        #self.spider_time = time.strftime("%H-%m-%d %X", time.localtime())
-        self.db = DB()
     
     def get_position(self, sp):
         name = sp["name"]
@@ -198,4 +198,3 @@ class ArticleCrawler(Crawler):
             if page_res:
                 res.extend(page_res)
         print "final", res
-        self.store(res)

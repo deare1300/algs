@@ -98,10 +98,12 @@ class SectionCrawler(Crawler):
                 ret.append(e)
         return ret
     
-    def crawl(self, download_args={}, download_code="gbk"):
-        info = Crawler.crawl(self, download_args=download_args, download_code=download_code)
-        
-        for e in info:
+    def store(self, info, update = False):
+        self.db.execute("select url from %s" % byr_tables["sub_section"])
+        urls = self.db.fetchall()
+        print urls
+        if not update:
+            for e in info:
                 if not e or e["title"] == None:
                     continue
                 url = e["title"][0]

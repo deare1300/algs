@@ -1,3 +1,5 @@
+#!:/bin/python
+# -*- coding:utf-8 -*-
 '''
 Created on 2014-11-25
 
@@ -36,10 +38,11 @@ class ArticleEngine(Engine):
                 continue
             if not tmp:
                 continue
+            res.extend(tmp)
             if len(res) >= commits:
                 store.store(res)
                 res = []
-            res.extend(tmp)
+            
         if res:
             store.store(res)
         store.complete()

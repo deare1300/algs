@@ -1,3 +1,5 @@
+#!:/bin/python
+# -*- coding:utf-8 -*-
 '''
 Created on 2014-11-25
 
@@ -11,11 +13,14 @@ class ProfileStorage(Storage):
     def __init__(self):
         super(ProfileStorage, self).__init__()
         
-    def store(self, p_info):
+    def store(self, p_infos):
+        if not p_infos:
+            return 
         self.db.execute('select url from %s' % (byr_tables["outline_section"]))
         stored_urls = self.db.fetchall()
-        print stored_urls
+        #print stored_urls
         values = ""
+        p_info = p_infos[0]
         self.pre_statement(p_info)
         for url, name in p_info.items():
             if    (url,) not in stored_urls:
@@ -32,4 +37,3 @@ class ProfileStorage(Storage):
             else:
                 print "success inserted"
         self.db.commit()
-        self.db.close()

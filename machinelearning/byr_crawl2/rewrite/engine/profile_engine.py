@@ -1,3 +1,5 @@
+#!:/bin/python
+# -*- coding:utf-8 -*-
 '''
 Created on 2014-11-25
 
@@ -5,35 +7,24 @@ Created on 2014-11-25
 '''
 from rewrite.engine.abstract_engine import Engine
 from rewrite.crawlers.profile_crawler import ProfileCrawler
-from rewrite.engine.filters import ProfileFilter
+from rewrite.storage.profile_storage import ProfileStorage
 
 class ProfileEngine(Engine):
-    def __init__(self, crawler = ProfileCrawler, filters = [ProfileFilter], 
-                 headers = None, storage = ProfileFilter):
+    def __init__(self, crawler = ProfileCrawler, filters = [None], 
+                 headers = None, storage = ProfileStorage):
         super(ProfileEngine, self).__init__(filters = filters, crawler = crawler,
                                          storage = storage)
         self.headers = headers
     
     def work(self, commits = 100):
-        sections = self.get_target()
+        #sections = self.get_target()
         res = []
         store = self.storage()
-        for s in sections:
-            print "section", s
-            c = self.crawler(profile_id = s[0], path_url = s[1], headers = self.headers)
-            try:
-                tmp = c.crawl()
-            except Exception, e:
-                print e
-                continue
-            if not tmp:
-                continue
-            if len(res) >= commits:
-                store.store(res)
-                res = []
-            res.extend(tmp)
+        c = self.crawler(headers = self.headers, root_url = "http://bbs.byr.cn/section/ajax_list.json")    
+        res.extend(c.crawl())    
+        print res
         if res:
-            store.store(res)      
+            store.store(res)   
         store.complete()
     
 if __name__ == "__main__":

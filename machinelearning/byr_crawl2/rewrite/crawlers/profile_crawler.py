@@ -17,7 +17,10 @@ class ProfileCrawler(Crawler):
         super(ProfileCrawler, self).__init__(path_url = path_url, 
               root_url = root_url, headers = headers)
         self.db = DB()
-        
+    
+    def process_url(self):
+        return "http://bbs.byr.cn/section/ajax_list.json?uid=deare1300&root=list-section"
+        return Crawler.process_url(self)+"?uid=deare1300&root=list-section"
     def parse(self, content):
         json_profiles = json.loads(content)
         ret = dict()
@@ -30,24 +33,3 @@ class ProfileCrawler(Crawler):
                 ret[a['href']] = a.text
         return (ret,) 
     
-    def store(self, p_info):
-        self.db.execute('select url from %s' % (byr_tables["outline_section"]))
-        stored_urls = self.db.fetchall()
-        print stored_urls
-        values = ""
-        for url, name in p_info.items():
-            if    (url,) not in stored_urls:
-                #print "new url", url
-                values += "('%s', '%s')," % (name, url)
-        values = values.rstrip(',')
-        if values:
-            sql = "insert into %s(name, url) values %s;" % (byr_tables["outline_section"], values)
-            print sql
-            nrows = self.db.execute(sql)
-            if nrows != len(p_info):
-                self.log.log_err("insert not complete:inserted % rows in origin % rows"
-                            % (nrows, len(p_info)))
-            else:
-                print "success inserted"
-        self.db.commit()
-        self.db.close()

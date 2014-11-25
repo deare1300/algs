@@ -1,3 +1,5 @@
+#!:/bin/python
+# -*- coding:utf-8 -*-
 '''
 Created on 2014-11-25
 
@@ -12,14 +14,14 @@ class SectionEngine(Engine):
     def __init__(self, crawler = SectionCrawler, filters = [SectionFilter], 
                  headers = None, storage = SectionStorage,
                  ):
-        super(SectionEngine, self).__init__(filters = filters, crawler = crawler,
-                                         storage = storage)
+        super(SectionEngine, self).__init__(filters = filters, crawler = crawler,                                     storage = storage)
         self.headers = headers
     
     def work(self, commits = 1):
         self.crawler(path_url = "/section/ajax_list.json", headers = self.headers)
         sections = self.get_target()
         for s in sections:
+            print s
             c = self.crawler(profile_id = s[0], path_url = s[1])
             c.crawl()
 

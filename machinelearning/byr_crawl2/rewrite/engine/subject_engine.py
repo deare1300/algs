@@ -1,3 +1,5 @@
+#!:/bin/python
+# -*- coding:utf-8 -*-
 '''
 Created on 2014-11-25
 
@@ -22,20 +24,16 @@ class SubjectEngine(Engine):
         store = self.storage()
         for s in subjects:
             print "subjects", s
-            c = self.crawler(s[0], path_url = s[1], headers = self.headers)
-            try:
-                tmp = c.crawl()
-            except Exception, e:
-                print e
+            c = self.crawler(section_id = s[0], path_url = s[1], headers = self.headers)
+            #try:
+            res = c.crawl()
+            # except Exception, e:
+            #     print e
+            #    continue
+            if not res:
                 continue
-            if not tmp:
-                continue
-            if len(res) >= commits:
-                store.store(res)
-                res = []
-            res.extend(tmp)
-        if res:
-            store.store(res)
+            store.store(res, section_id = s[0])
+            print "subject over********************************"
         
         store.complete()
         

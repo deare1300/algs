@@ -15,7 +15,7 @@ def encode_args(d):
     return value 
 
 class Crawler(object):
-    def __init__(self, path_url = '/',
+    def __init__(self, path_url = '',
                  root_url = default_url, headers = None, parse_code = "utf8"):
         self.path_url = path_url
         self.root_url = root_url
@@ -28,6 +28,7 @@ class Crawler(object):
     
     def download(self, args = {}, code = "gbk", timeout = 2):
         url =  self.process_url()
+        print url
         #print "download url", url
         if self.headers:
             req = urllib2.Request(url, headers = self.headers)
@@ -47,6 +48,7 @@ class Crawler(object):
     
     def crawl(self, download_args = {}, download_code = "gbk"):
         utf8_html = self.download(download_args, download_code)
+        print "crawled", utf8_html
         if not utf8_html:
             return None
         result = self.parse(utf8_html)
